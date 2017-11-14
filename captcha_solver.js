@@ -1,8 +1,8 @@
 function getCaptchaImage() {
     var imageNode = submitForm.getElementsByTagName('img')[0];
 
-    var result = getBase64Image(imageNode);
-    alert(result);
+    var rawImage = getRawImage(imageNode);
+    
 }
 
 function writeAnswerInCaptchaInput() {
@@ -25,8 +25,12 @@ document.body.appendChild(btnWriteAnswer);
 var btnWriteAnswerText = document.createTextNode("Write in input");
 btnWriteAnswer.appendChild(btnWriteAnswerText);
 
-// From https://stackoverflow.com/a/934925
-function getBase64Image(img) {
+/**
+ * Gets raw image data from img node
+ * @param {Node} img
+ * @returns {ImageData}
+ */
+function getRawImage(img) {
     // Create an empty canvas element
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
@@ -36,11 +40,5 @@ function getBase64Image(img) {
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
-    // Get the data-URL formatted image
-    // Firefox supports PNG and JPEG. You could check img.src to
-    // guess the original format, but be aware the using "image/jpg"
-    // will re-encode the image.
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    return ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
