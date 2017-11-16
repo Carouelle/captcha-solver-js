@@ -1,0 +1,16 @@
+{
+
+  "manifest_version": 2,
+  "name": "captcha-solver-js",
+  "version": "0.1",
+
+  "description": "captcha-solver-js",
+
+  "content_scripts": [
+    {
+      "matches": ["YOUR_WEBSITE_HERE"],
+      "js": ["config.js", "captcha_solver.js"]
+    }
+  ]
+
+}

@@ -1,6 +1,6 @@
-var submitForm = document.getElementsByName('form1')[0];
 var btnGetImage = document.createElement('button');
-btnGetImage.onclick = getCaptchaImage;
+btnGetImage.onclick = downloadCaptchaImage;
+
 document.body.appendChild(btnGetImage);
 
 var btnGetImageText = document.createTextNode("Get image");
@@ -13,9 +13,8 @@ document.body.appendChild(btnWriteAnswer);
 var btnWriteAnswerText = document.createTextNode("Write in input");
 btnWriteAnswer.appendChild(btnWriteAnswerText);
 
-function getCaptchaImage() {
-    var imageNode = submitForm.getElementsByTagName('img')[0];
-    var rawImage = getRawImage(imageNode);
+function downloadCaptchaImage() {
+    var rawImage = getRawImage(config.captchaImage);
 
     var stringByteArray = "";
     for (var i = 0; i < rawImage.height * rawImage.width * 4; i++) {
@@ -26,8 +25,8 @@ function getCaptchaImage() {
 }
 
 function writeAnswerInCaptchaInput() {
-    var inputForm = document.getElementsByName('noCaptcha')[0];
-    inputForm.value = 'Hello World'
+    var inputElement = config.inputElement;
+    inputElement.value = 'Hello World';
 }
 
 /**
