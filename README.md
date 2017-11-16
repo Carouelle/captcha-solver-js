@@ -1,3 +1,5 @@
 # Simple Captcha solver in Javascript
 # WIP
-Goal is to use this as Greasmonkey script or Chrome JS extension
+Browser extension that will solve simple captchas as the ones shown in examples directory.
+
+Note that these captchas all use the Times New Yorker font.
