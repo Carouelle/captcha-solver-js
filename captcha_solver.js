@@ -14,14 +14,15 @@ var btnWriteAnswerText = document.createTextNode("Write in input");
 btnWriteAnswer.appendChild(btnWriteAnswerText);
 
 function downloadCaptchaImage() {
-    var rawImage = getRawImage(config.captchaImage);
+    var canvas = getRawImage(config.captchaImage);
 
-    var stringByteArray = "";
-    for (var i = 0; i < rawImage.height * rawImage.width * 4; i++) {
-        stringByteArray += rawImage.data[i] + ',';
-    }
+    var link = document.createElement('a');
+    link.setAttribute('download', 'captcha.bmp');
+    link.setAttribute('href', canvas.toDataURL('image/bmp'));
 
-    location.href = 'data:text/plain:charset=utf-8,' + encodeURIComponent(stringByteArray);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 function writeAnswerInCaptchaInput() {
@@ -32,7 +33,7 @@ function writeAnswerInCaptchaInput() {
 /**
  * Gets raw image data from Image element
  * @param {Image} img
- * @returns {ImageData}
+ * @returns {HTMLElement} canvas
  */
 function getRawImage(img) {
     // Create an empty canvas element
@@ -44,5 +45,5 @@ function getRawImage(img) {
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
-    return ctx.getImageData(0, 0, canvas.width, canvas.height);
+    return canvas;
 }

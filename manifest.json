@@ -8,7 +8,7 @@
 
   "content_scripts": [
     {
-      "matches": ["YOUR_WEBSITE_HERE"],
+      "matches": ["https://carouelle.github.io/captcha/"],
       "js": ["config.js", "captcha_solver.js"]
     }
   ]
